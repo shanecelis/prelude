@@ -319,9 +319,9 @@
             (run-after-make-frame-hooks (selected-frame))))
 
 (set-variable 'color-theme-is-global nil)
-(add-hook 'after-make-window-system-frame-hooks 
-          (lambda ()
-            (load-theme 'pastels-on-dark-custom)))
+;; (add-hook 'after-make-window-system-frame-hooks 
+;;           (lambda ()
+;;             (load-theme 'pastels-on-dark-custom)))
 ;(add-hook 'after-make-console-frame-hooks 'color-theme-emacs-nw)
 
 ; 'window-system' is nil for a character-based terminal, 'x' for X11, 'mac' for mac, etc.
@@ -752,8 +752,8 @@ This command does not delete or overwrite any existing text."
   (kill-region beg end yank-handler))
 
 ;; This will be great for doing a screencast.
-(require 'mwe-log-commands
-         "~/.emacs.d/mwe-log-commands.el")
+;(require 'mwe-log-commands
+;         "~/.emacs.d/mwe-log-commands.el")
 
 (defun toggle-current-window-dedication ()
  (interactive)
@@ -812,7 +812,7 @@ But in programs you might prefer to use `extract-rectangle'."
 ;;     (yank-rectangle)))
 
 
-(window-number-mode)
+;(window-number-mode)
 ;; http://taiyaki.org/elisp/word-count/src/word-count.el
 
 ;(autoload 'twitter-get-friends-timeline "twitter" nil t)
@@ -994,7 +994,6 @@ Repeated invocations toggle between the two most recently open buffers."
 
 (global-set-key (kbd "C-c b") 'switch-to-previous-buffer)
 
-(require 'bm)
 (global-set-key (kbd "M-\\") 'bm-toggle)
 (global-set-key (kbd "M-[") 'bm-previous)
 (global-set-key (kbd "M-]") 'bm-next)
