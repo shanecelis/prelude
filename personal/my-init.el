@@ -40,10 +40,7 @@
 
 ;; Requires
 ;; ========
-
-
-(require 'window-number)
-
+;(require scheme-mode)
 
 ;; Key bindings
 ;; ============
@@ -83,12 +80,12 @@
 ;; other things.
 ;; (define-key view-mode-map "q" 'bury-buffer) ;XXX turned off for Emacs full screen
 ;; (define-key help-mode-map "q" 'bury-buffer)
-(define-key view-mode-map "q" 'bury-buffer) ;XXX turned off for Emacs full screen
+;(define-key view-mode-map "q" 'bury-buffer) ;XXX turned off for Emacs full screen
 (define-key help-map "q" 'bury-buffer)
-(define-key nuweb-mode-map (kbd "C-c C-l") 'recompile)
-(define-key scheme-mode-map (kbd "C-c C-b") 'scheme-send-buffer)
-(define-key scheme-mode-map (kbd "C-c u u") 'scheme-run-unit-tests)
-(define-key scheme-mode-map (kbd "C-c u r") 'scheme-reset-unit-tests)
+;(define-key nuweb-mode-map (kbd "C-c C-l") 'recompile)
+;; (define-key scheme-mode-map (kbd "C-c C-b") 'scheme-send-buffer)
+;; (define-key scheme-mode-map (kbd "C-c u u") 'scheme-run-unit-tests)
+;; (define-key scheme-mode-map (kbd "C-c u r") 'scheme-reset-unit-tests)
 ;(add-hook 'inferior-scheme-mode-hook (function gambit-inferior-mode)) 
 
 (define-key completion-list-mode-map "q" 'bury-buffer)
@@ -176,7 +173,7 @@
 
 ;(global-set-key (kbd "M-/") 'hippie-expand)
 ;(global-set-key (kbd "M-i") 'back-to-indentation)
-(;global-set-key (kbd "M-m") 'iy-go-to-char)
+;(global-set-key (kbd "M-m") 'iy-go-to-char)
 (global-set-key (kbd "C-/") 'comment-region)
 ;(global-set-key (kbd "C-0") 'ace-jump-mode)
 ;(global-set-key (kbd "C-@") 'expand-region)
