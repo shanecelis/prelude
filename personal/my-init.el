@@ -5,6 +5,8 @@
 
 ;(toggle-debug-on-error t)
 
+(ido-mode t)
+
 ;; Load Path
 ;; =========
 
@@ -18,12 +20,7 @@
 ;; Set and Set Default
 ;; ===================
 
-(setq require-final-newline t      ; Always end a file with a newline
-      indent-tabs-mode nil         ; No more tabs (not cross platform)
-      tab-default-width 4
-      c-basic-offset 4
-      c-brace-offset -2
-      inhibit-startup-message t
+(setq inhibit-startup-message t
       password-cache-expiry 7200
       remember-annotation-functions '(org-remember-annotation)
       remember-handler-functions '(org-remember-handler)
@@ -199,6 +196,10 @@
                              (local-set-key  (kbd "<up>") 'comint-previous-input)
                              (local-set-key  (kbd "<down>") 'comint-next-input)
                              ))
+
+(add-hook 'csharp-mode-hook (lambda ()
+                              (local-set-key (kbd "{") 'c-electric-brace)
+                                                          ))
 
 
 (defun scheme-add-unit-test-keys ()
@@ -1055,3 +1056,39 @@ Repeated invocations toggle between the two most recently open buffers."
   (browse-url (concat "http://www.google.com/search?btnI&q="
                       (url-hexify-string 
                        (concat "unity api reference " string)))))
+
+;; http://www.emacswiki.org/FlyMake
+;; Trying to make it find the topmost makefile.
+(defadvice flymake-find-buildfile
+    (around advice-find-makefile-separate-obj-dir
+            activate compile)
+  "Look for buildfile in a separate build directory"
+  (let* ((source-dir (ad-get-arg 1))
+	 (bld-dir (top-build-dir source-dir)))
+    (ad-set-arg 1 bld-dir)
+    ad-do-it))
+
+(defun ac-find-configure (source-dir)
+  (locate-dominating-file source-dir "configure"))
+
+(defun find-makefile (source-dir)
+  (locate-dominating-file source-dir "Makefile"))
+
+(defvar project-build-root nil
+  "top build directory of the project")
+
+(defun ac-build-dir (source-dir)
+  "find the build directory for the given source directory"
+  (condition-case nil
+      (let* ((topdir (ac-find-configure source-dir))
+	     (subdir (file-relative-name (file-name-directory source-dir) topdir))
+	     (blddir (concat (file-name-as-directory project-build-root) subdir)))
+	blddir)
+    (error source-dir)))
+
+(defun top-build-dir (source-dir)
+  "find the build directory for the given source directory"
+  (condition-case nil
+      (let* ((topdir (find-makefile source-dir)))
+	topdir)
+    (error source-dir)))
