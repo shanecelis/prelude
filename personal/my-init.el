@@ -1,10 +1,9 @@
-;; old.emacs.el
-;; 
-;; Shane Celis
+;;; my-init.el -- Emacs init file by Shane Celis
 ;;
 
 ;(toggle-debug-on-error t)
 
+;;;; Code:
 (ido-mode t)
 
 ;; Load Path
@@ -32,7 +31,6 @@
       scheme-program-name "gsi -:d-"
       wdired-allow-to-change-permissions 'advanced
       ;;source-directory "~/.emacs.d/20090111/src"
-      ido-enable-flex-matching t
 )
 
 ;; Requires
@@ -47,14 +45,12 @@
                                       (interactive "r")
                                       (indent-rigidly start end (- c-basic-offset))
                                       (exchange-point-and-mark)
-                                      (exchange-point-and-mark))
-                )
+                                      (exchange-point-and-mark)))
 (global-set-key (kbd "C-x <tab>") (lambda (start end)
                                       (interactive "r")
                                       (indent-rigidly start end c-basic-offset)
                                       (exchange-point-and-mark)
-                                      (exchange-point-and-mark))
-                )
+                                      (exchange-point-and-mark)))
 ;  (global-set-key (kbd "A-t") 'shell)
 ;  (global-set-key (kbd "A-u") 'digit-argument)
 (global-set-key (kbd "<A-return>") 'toggle-frame-fullscreen)
@@ -83,7 +79,7 @@
 ;; (define-key scheme-mode-map (kbd "C-c C-b") 'scheme-send-buffer)
 ;; (define-key scheme-mode-map (kbd "C-c u u") 'scheme-run-unit-tests)
 ;; (define-key scheme-mode-map (kbd "C-c u r") 'scheme-reset-unit-tests)
-;(add-hook 'inferior-scheme-mode-hook (function gambit-inferior-mode)) 
+;(add-hook 'inferior-scheme-mode-hook (function gambit-inferior-mode))
 
 (define-key completion-list-mode-map "q" 'bury-buffer)
 
@@ -100,7 +96,7 @@
 (global-set-key (kbd "A-{") 'shrink-window)
 (global-set-key (kbd "A-}") 'enlarge-window)
 
-(global-set-key (kbd "C-c p") 'customize-group) ; p for preferences  
+(global-set-key (kbd "C-c p") 'customize-group) ; p for preferences
 ;(global-set-key (kbd "C-c /") 'anything)
 ;; This one was a little scary.
 ;;(global-set-key "\M-x" 'ido-execute-command)
@@ -147,22 +143,22 @@
 ;(global-set-key (kbd "C-c i") 'auto-install-from-emacswiki)
 ;(global-set-key (kbd "C-c i") 'anything-auto-install-from-emacswiki)
 
-(global-set-key (kbd "C-o") (lambda () (interactive) 
+(global-set-key (kbd "C-o") (lambda () (interactive)
                                     (other-window 1 nil)))
-(global-set-key (kbd "A-0") (lambda () (interactive) 
+(global-set-key (kbd "A-0") (lambda () (interactive)
                                     (other-window-from-top 0)))
-(global-set-key (kbd "A-1") (lambda () (interactive) 
+(global-set-key (kbd "A-1") (lambda () (interactive)
                                     (other-window-from-top 1)))
-(global-set-key (kbd "A-2") (lambda () (interactive) 
+(global-set-key (kbd "A-2") (lambda () (interactive)
                                     (other-window-from-top 2)))
-(global-set-key (kbd "A-3") (lambda () (interactive) 
+(global-set-key (kbd "A-3") (lambda () (interactive)
                                     (other-window-from-top 3)))
-(global-set-key (kbd "A-4") (lambda () (interactive) 
+(global-set-key (kbd "A-4") (lambda () (interactive)
                                     (other-window-from-top 4)))
-(global-set-key (kbd "A-5") (lambda () (interactive) 
+(global-set-key (kbd "A-5") (lambda () (interactive)
                                     (other-window-from-top 5)))
 ;(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)  
+(define-key global-map "\C-ca" 'org-agenda)
 
 
 (global-set-key [(control ?.)] 'goto-last-change)
@@ -179,13 +175,13 @@
 ;; Add Hooks
 ;; =========
 
-(add-hook 'buffer-menu-mode-hook 
+(add-hook 'buffer-menu-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-o") (lambda () (interactive) 
+            (local-set-key (kbd "C-o") (lambda () (interactive)
                                                (other-window 1 nil)))))
-(add-hook 'occur-mode-hook 
+(add-hook 'occur-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-o") (lambda () (interactive) 
+            (local-set-key (kbd "C-o") (lambda () (interactive)
                                                (other-window 1 nil)))))
 (add-hook 'shell-mode-hook (lambda ()
                              (ansi-color-for-comint-mode-on)
@@ -198,19 +194,21 @@
                              ))
 
 (add-hook 'csharp-mode-hook (lambda ()
-                              (local-set-key (kbd "{") 'c-electric-brace)
-                                                          ))
+                              (local-set-key (kbd "{") 'c-electric-brace)))
+
+(add-hook 'undo-tree-mode-hook (lambda ()
+                                 (local-set-key (kbd "C-/") 'comment-region)))
 
 
 (defun scheme-add-unit-test-keys ()
   (local-set-key (kbd "C-c u u") 'scheme-run-unit-tests)
   (local-set-key (kbd "C-c u r") 'scheme-reset-unit-tests)
   )
-(add-hook 'inferior-scheme-mode-hook 'scheme-add-unit-test-keys) 
+(add-hook 'inferior-scheme-mode-hook 'scheme-add-unit-test-keys)
 (add-hook 'scheme-mode-hook 'scheme-add-unit-test-keys)
 ; (function gambit-inferior-mode)
-(add-hook 'c-mode-hook (lambda ()
-                         (setq tab-width 4)))
+;; (add-hook 'c-mode-hook (lambda ()
+;;                          (setq tab-width 4)))
 (add-hook 'c-mode-common-hook (lambda ()
                                 (font-lock-add-keywords nil
                                                         '(("\\<\\(FIXME\\|TODO\\|BUG\\|XXX\\):" 1
@@ -229,14 +227,14 @@
                                 (local-set-key (kbd "C-o") 'other-window)
                                 ))
 
-(add-hook 'lisp-interaction-mode-hook (lambda() 
+(add-hook 'lisp-interaction-mode-hook (lambda()
                                         (local-set-key  (kbd "C-c C-j") 'eval-last-sexp)
                                         (local-set-key  (kbd "C-c C-c") 'eval-defun)
                                         (local-set-key  (kbd "M-j") 'macroexpand-last-sexp)
                                         ))
 
 (add-hook 'picture-mode-hook (lambda() (local-set-key  (kbd "<down-mouse-3>") 'artist-mouse-choose-operation)))
-(add-hook 'org-mode-hook (lambda() 
+(add-hook 'org-mode-hook (lambda()
                            (local-set-key  (kbd "C-c C-x C-u") 'org-clock-update-time-maybe)
                            ))
 (add-hook 'remember-mode-hook 'org-remember-apply-template)
@@ -244,12 +242,12 @@
 (add-hook 'html-helper-mode-hook 'yas/minor-mode)
 (add-hook 'lua-mode-hook 'yas/minor-mode)
 ;(add-hook 'twitter-status-edit-mode-hook 'longlines-mode)
-;(add-hook 'inferior-scheme-mode-hook (function gambit-inferior-mode)) 
+;(add-hook 'inferior-scheme-mode-hook (function gambit-inferior-mode))
 ;(add-hook 'scheme-mode-hook (function gambit-mode))
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'doc-view-mode-hook 
+(add-hook 'doc-view-mode-hook
           (lambda()
             (auto-revert-mode)
             (local-set-key (kbd "C-v") 'doc-view-scroll-up-or-next-page)
@@ -258,7 +256,7 @@
 (add-hook 'emacs-lisp-mode-hook
 	    (lambda ()
 	      (paredit-mode t)
-	      (turn-on-eldoc-mode)
+	      (eldoc-mode)
 	      (eldoc-add-command
 	       'paredit-backward-delete
 	       'paredit-close-round)
@@ -272,7 +270,7 @@
 	      (enable-paredit-mode)
         (make-local-variable 'eldoc-documentation-function)
         (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
-	      (turn-on-eldoc-mode)
+	      (eldoc-mode)
 	      (eldoc-add-command
 	       'paredit-backward-delete
 	       'paredit-close-round)
@@ -289,9 +287,9 @@
 (eval-after-load 'paredit
   '(progn
     (define-key paredit-mode-map (kbd "\\") 'self-insert-command)
-    (add-to-list 
+    (add-to-list
      'paredit-space-for-delimiter-predicates (lambda (endp delimiter)
-                                               (not (equal (char-syntax (char-before)) ?\#)))))) 
+                                               (not (equal (char-syntax (char-before)) ?\#))))))
 
 (eval-after-load 'geiser-mode
   '(progn (define-key geiser-mode-map (kbd "C-c C-e") 'geiser-eval-definition)
@@ -320,18 +318,18 @@
             (run-after-make-frame-hooks (selected-frame))))
 
 (set-variable 'color-theme-is-global nil)
-;; (add-hook 'after-make-window-system-frame-hooks 
+;; (add-hook 'after-make-window-system-frame-hooks
 ;;           (lambda ()
 ;;             (load-theme 'pastels-on-dark-custom)))
 ;(add-hook 'after-make-console-frame-hooks 'color-theme-emacs-nw)
 
 ; 'window-system' is nil for a character-based terminal, 'x' for X11, 'mac' for mac, etc.
 
-; If my color-theme won't work, then use midnight. 
-
+; If my color-theme won't work, then use midnight.
+(require 'cl)
 (defun unique (lst)
-  (and lst 
-       (cons (car lst) 
+  (and lst
+       (cons (car lst)
              (unique (remove-if (lambda (x) (eq (car lst) x)) (cdr lst))))))
 
 (defun repl ()
@@ -377,11 +375,11 @@
 (global-set-key (kbd "C-=") 'my-increment-number-decimal)
 (global-set-key (kbd "C--") 'my-decrement-number-decimal)
 
-(global-set-key (kbd "C-=") '(lambda () (interactive) 
+(global-set-key (kbd "C-=") '(lambda () (interactive)
                               (my-increment-number-decimal)
                               (geiser-eval-definition)))
 
-(global-set-key (kbd "C--") '(lambda () (interactive) 
+(global-set-key (kbd "C--") '(lambda () (interactive)
                               (my-decrement-number-decimal)
                               (geiser-eval-definition)))
 
@@ -432,7 +430,7 @@
 ;;          (bury-buffer "*compilation*")
 ;;          (winner-undo)
 ;;          (message "Build successful."))
-;;         (t                                                                    
+;;         (t
 ;;          (message "Compilation exited abnormally: %s" string))))
 
 
@@ -728,7 +726,7 @@ This command does not delete or overwrite any existing text."
   (interactive)
   (let ((my-in-clipboard-to-kill-ring t))
   (save-excursion
-    (with-temp-buffer 
+    (with-temp-buffer
         (clipboard-yank)
         (message "max %d" (point-max))
         (unless (= 1 (point-max))
@@ -740,7 +738,7 @@ This command does not delete or overwrite any existing text."
         ))))
 
 (defun my-cut-function (string &optional push)
-  (unless my-in-clipboard-to-kill-ring 
+  (unless my-in-clipboard-to-kill-ring
     (my-clipboard-to-kill-ring))
   (x-select-text string push))
 
@@ -781,7 +779,7 @@ by using nxml's indentation rules."
   (save-excursion
       (nxml-mode)
       (goto-char begin)
-      (while (search-forward-regexp "\>[ \\t]*\<" nil t) 
+      (while (search-forward-regexp "\>[ \\t]*\<" nil t)
         (backward-char) (insert "\n"))
       (indent-region begin end))
     (message "Ah, much better!"))
@@ -821,7 +819,7 @@ But in programs you might prefer to use `extract-rectangle'."
 ;(global-set-key "\C-ct" 'twitter-get-friends-timeline)
 (server-start)
 
-;(autoload 'gambit-inferior-mode "gambit" "Hook Gambit mode into cmuscheme.") 
+;(autoload 'gambit-inferior-mode "gambit" "Hook Gambit mode into cmuscheme.")
 ;(autoload 'gambit-mode "gambit" "Hook Gambit mode into scheme.")
 
 (add-to-list 'load-path "~/.emacs.d/processing-emacs/")
@@ -848,7 +846,7 @@ But in programs you might prefer to use `extract-rectangle'."
 ;;      (0 (put-text-property
 ;;          (match-beginning 0)
 ;;          (match-end 0)
-;;          'face (list :foreground "#ffffff" :background 
+;;          'face (list :foreground "#ffffff" :background
 ;;                      (match-string-no-properties 0)))))))
 
 ;; (defun hexcolour-add-to-font-lock ()
@@ -876,7 +874,7 @@ But in programs you might prefer to use `extract-rectangle'."
             (if (and (looking-at "$")(not (looking-back "^")))
                 (move-overlay (symbol-value sovl) (1- value) value)
               (move-overlay (symbol-value sovl) value (1+ value))))
-        (if aelt 
+        (if aelt
             (setcdr aelt value)
           (push (cons register value) register-alist))
         value))
@@ -937,12 +935,6 @@ But in programs you might prefer to use `extract-rectangle'."
     (save-window-excursion
       (select-window (minibuffer-window))
       (keyboard-escape-quit))))
-
-(defun sudo-find-file (file-name)
-  "Like find file, but opens the file as root."
-  (interactive "FSudo Find File: ")
-  (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
-    (find-file tramp-file-name)))
 
 (eval-after-load "tex-mode" '(fset 'tex-font-lock-suscript 'ignore))
 (setq-default TeX-master t)
@@ -1018,12 +1010,6 @@ Repeated invocations toggle between the two most recently open buffers."
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-(defun sudo-find-file (file-name)
-  "Like find file, but opens the file as root."
-  (interactive "FSudo Find File: ")
-  (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
-    (find-file tramp-file-name)))
-
 ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Switching-Buffers.html#Switching-Buffers
 (setq switch-to-buffer-preserve-window-point 'already-displayed)
 
@@ -1050,11 +1036,11 @@ Repeated invocations toggle between the two most recently open buffers."
 
 (defun unity-api-lookup (string)
   "Opens up a browser to Google's first hit for the search string 'unity api reference ' plus your search term."
-  (interactive (list 
-                (read-string "Look up Unity API reference for: " 
+  (interactive (list
+                (read-string "Look up Unity API reference for: "
                              (thing-at-point 'word) 'unity-api-lookup-history)))
   (browse-url (concat "http://www.google.com/search?btnI&q="
-                      (url-hexify-string 
+                      (url-hexify-string
                        (concat "unity api reference " string)))))
 
 ;; http://www.emacswiki.org/FlyMake
@@ -1092,3 +1078,13 @@ Repeated invocations toggle between the two most recently open buffers."
       (let* ((topdir (find-makefile source-dir)))
 	topdir)
     (error source-dir)))
+
+(defun dired-open-in-macosx ()
+  "Opens a file in dired with the Mac OS X command 'open'."
+  (interactive)
+  (shell-command (concat "open " (shell-quote-argument (expand-file-name (dired-file-name-at-point))))))
+
+(define-key dired-mode-map (kbd "O") 'dired-open-in-macosx)
+
+(provide 'my-init)
+;;; my-init.el ends here
